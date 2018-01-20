@@ -11,10 +11,10 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 	docker-ce \
 && rm -rf /var/lib/apt/lists/*
 
-COPY startup-docker.sh /data
+COPY startup.sh /data
 
 COPY VERSION /ver-linux-docker-term
 
-ENTRYPOINT ["/data/startup-docker.sh"]
+ENTRYPOINT ["/data/startup.sh"]
 
 EXPOSE 22
