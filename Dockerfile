@@ -1,14 +1,20 @@
-from ektar/linux-ldap:v1.0.2
+from ektar/linux-ldap:v1.1.7
 MAINTAINER eric@ds-do.com
+
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
+    apt-key add -
+    
+RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 
 RUN export DEBIAN_FRONTEND=noninteractive && \
 	apt-get update && apt install -qy \
-	docker.io \
+	docker-ce \
 && rm -rf /var/lib/apt/lists/*
 
-RUN usermod -a -G docker ecarlson
-RUN usermod -a -G sudo ecarlson
+COPY startup-docker.sh /data
 
-ENTRYPOINT ["/data/startup.sh"]
+COPY VERSION /ver-linux-docker-term
+
+ENTRYPOINT ["/data/startup-docker.sh"]
 
 EXPOSE 22

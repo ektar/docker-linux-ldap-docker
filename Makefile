@@ -1,6 +1,6 @@
 repo_path = ektar
 
-name = linux-ldap-docker
+name = linux-docker
 ver = $(shell cat VERSION)
 
 ifdef http_proxy
